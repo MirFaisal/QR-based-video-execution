@@ -36,6 +36,7 @@
                             class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="video link" />
                         <button type="submit"
+                        id="Genaret"
                             class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Genaret
                         </button>
@@ -44,13 +45,6 @@
             </div>
         </div>
         <div class="max-w-[400px] mx-auto pt-4 flex justify-center items-center" id="qrCode"></div>
-
-        <div class="mt-5 w-full flex justify-center">
-            <button id='saveQR'
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Save
-            </button>
-        </div>
     </main>
     {{-- flowbite cdn --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
@@ -58,7 +52,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     {{-- bultin api for pass qrcode and link --}}
 
     <Script>
@@ -68,7 +62,6 @@
                     event.preventDefault(); // Prevent the default form submission
                     // Collect form data
                     var formData = new FormData(this);
-
                     // Send form data via AJAX
                     $.ajax({
                         url: $(this).attr("action"),
@@ -93,20 +86,7 @@
                             );
                             // You can show an error message here
                         },
-                        
                     });
-                });
-                
-                $('#saveQR').click(function () {
-                    console.log('click');
-                    // Data to be sent to the Laravel route
-                    var dataToSend = {
-                        "_token": "{{ csrf_token() }}",
-                        qrCode: htQrCode,
-                        url: originalUrl
-                        // Add more key-value pairs as needed
-                    };
-
                 });
             });
     </Script>

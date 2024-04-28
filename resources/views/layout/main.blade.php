@@ -13,7 +13,7 @@
 
     <!-- Styles -->
     @vite('resources/css/app.css')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     </script>
 </head>
 <body class="p-4">
@@ -30,15 +30,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     {{-- bultin api for pass qrcode and link --}}
-
+    <script type="module" src="{{ asset('js/main.js') }}"></script>
     <Script>
         $(document).ready(function () {
                 // Handle form submission 
                 $("#qrForm").submit(function (event) {
-                    event.preventDefault(); // Prevent the default form submission
-                    // Collect form data
+                // Collect form data    
                     var formData = new FormData(this);
-
                     // Send form data via AJAX
                     $.ajax({
                         url: $(this).attr("action"),
@@ -68,74 +66,6 @@
                 });
             });
     </Script>
-
-    {{-- <script>
-            // Place this script at the end of your Blade template or in a separate JavaScript file.
-            let originalUrl;
-            let htQrCode;
-            $(document).ready(function() {
-                // Handle form submission 
-                $("#qrForm").submit(function(event) {
-                    event.preventDefault(); // Prevent the default form submission
-                    // Collect form data
-                    var formData = new FormData(this);
-                    
-                    // Send form data via AJAX
-                    $.ajax({
-                        url: $(this).attr("action")
-                        , type: "POST"
-                        , data: formData
-                        , processData: false
-                        , contentType: false
-                        , success: function(response) {
-                            // Handle successful submission
-                            console.log(response);
-                            htQrCode = response.qrCode;
-                            originalUrl = response.url;
-                            $("#qrCode").html(response.qrCode);
-                    
-                            // You can redirect or show a success message here
-                        }
-                        , error: function(xhr, status, error) {
-                            // Handle errors
-                            console.error(
-                                "There was a problem with the AJAX request:"
-                                , error
-                            );
-                            // You can show an error message here
-                        }
-                    , });
-                });
-
-                $('#saveQR').click(function() {
-                    console.log('click');
-        // Data to be sent to the Laravel route
-        var dataToSend = {
-            "_token": "{{ csrf_token() }}",
-    qrCode: htQrCode,
-    url: originalUrl
-    // Add more key-value pairs as needed
-    };
-
-    // Send an AJAX POST request to the Laravel route using its name
-    $.ajax({
-    type: 'POST',
-    url: '{{ route('Create::Shortener') }}',
-    data: dataToSend,
-    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-    dataType: 'json',
-    success: function(response) {
-    // Handle success response
-    console.log(response);
-    },
-    error: function(xhr, status, error) {
-    // Handle error response
-    console.error(xhr.responseText);
-    }
-    });
-    });
-    });
-
-    </script> --}}
+    <script src="{{asset('js/main.js')}}"></script>
 </body>
 </html>
